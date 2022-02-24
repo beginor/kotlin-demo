@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.filter.CorsFilter
 
 @Configuration
 @EnableWebSecurity
@@ -41,5 +44,17 @@ class Configure {
         http.csrf().disable()
         http.formLogin().disable()
         return http.build()
+    }
+
+    @Bean
+    fun corsFilterBean(): CorsFilter {
+        val cors = CorsConfiguration()
+        cors.addAllowedOrigin("*")
+        cors.addAllowedHeader("*")
+        cors.addAllowedMethod("*")
+        cors.allowCredentials = false
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", cors)
+        return CorsFilter(source)
     }
 }
