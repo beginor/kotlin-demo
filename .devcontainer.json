@@ -1,0 +1,6 @@
+{
+  "name": "OpenJDK 17",
+  "image": "openjdk:17.0.2-jdk",
+  "forwardPorts": [5000],
+  "shutdownAction": "stopContainer"
+}
